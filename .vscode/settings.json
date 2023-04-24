@@ -1,0 +1,11 @@
+{
+	"svelte.enable-ts-plugin": true,
+	"eslint.validate": ["svelte"],
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true
+	},
+	"[css]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	}
+}
