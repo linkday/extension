@@ -78,8 +78,8 @@
 
 <svelte:window on:click={handleClickEvent} />
 
-<div class="flex flex-col gap-12 p-8">
-	<div class="text-4xl font-bold">Add Bookmark</div>
+<div class="mb-4 flex flex-col p-8">
+	<div class="mb-12 text-4xl font-bold">Add Bookmark</div>
 	<div class="grid grid-flow-row gap-4">
 		<div class="flex flex-col gap-2">
 			<label class="text-md mb-2 block font-medium text-gray-900">
@@ -110,7 +110,7 @@
 				/>
 
 				{#if isSelectTagPanelOpen}
-					<div class="absolute" bind:this={selectTagPanel}>
+					<div class="relative" bind:this={selectTagPanel}>
 						<div class="flex flex-col rounded-lg border border-gray-300 bg-white p-2 shadow-md">
 							{#if !filteredTags.map((tag) => tag.name).includes(tagSerachString)}
 								<button
