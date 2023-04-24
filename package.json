@@ -32,10 +32,15 @@
 		"prettier-plugin-tailwindcss": "^0.2.7",
 		"svelte": "^3.58.0",
 		"svelte-check": "^3.2.0",
+		"sveltekit-superforms": "^0.8.1",
 		"tailwindcss": "^3.3.1",
 		"tslib": "^2.5.0",
 		"typescript": "^5.0.4",
-		"vite": "^4.3.1"
+		"vite": "^4.3.1",
+		"zod": "^3.21.4"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"@zodios/core": "^10.9.0"
+	}
 }
