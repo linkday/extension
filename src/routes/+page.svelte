@@ -3,13 +3,19 @@
 	import { schemas, type Tag } from "../api/api.client";
 	import ErrorMessage from "../components/ErrorMessage.svelte";
 	import { api } from "../api";
-	import { goto } from "$app/navigation";
 	import { tick } from "svelte";
 	import "../index.css";
+	import { browser } from "$app/environment";
 
 	export let data;
 
 	const { form, errors, constraints } = superForm(data.form);
+
+	if (browser) {
+		chrome.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
+			$form.url = tabs[0].url || "";
+		});
+	}
 
 	const BookmarkPayload = schemas.BookmarkPayload.refine((val) => val.tag_ids.length > 0, {
 		message: "At least one tag is required",
@@ -74,27 +80,7 @@
 
 <div class="flex flex-col gap-12 p-8">
 	<div class="text-4xl font-bold">Add Bookmark</div>
-	<form
-		method="post"
-		class="grid grid-flow-row gap-4"
-		on:submit|preventDefault={async () => {
-			const result = await superValidate($form, BookmarkPayload);
-			if (!result.valid) {
-				$errors = result.errors;
-				return;
-			}
-
-			api
-				.addBookmark($form)
-				.then((resp) => {
-					console.log(resp);
-					goto("/");
-				})
-				.catch((err) => {
-					console.log(err);
-				});
-		}}
-	>
+	<div class="grid grid-flow-row gap-4">
 		<div class="flex flex-col gap-2">
 			<label class="text-md mb-2 block font-medium text-gray-900">
 				Url
@@ -195,10 +181,32 @@
 		</div>
 		<div class="flex justify-end">
 			<button
-				type="submit"
+				on:click={async () => {
+					const result = await superValidate($form, BookmarkPayload);
+					if (!result.valid) {
+						$errors = result.errors;
+						return;
+					}
+
+					api
+						.addBookmark($form)
+						.then((resp) => {
+							console.log(resp);
+
+							$form = {
+								url: "",
+								tag_ids: [],
+							};
+							tagSerachString = "";
+							selectedTags = [];
+						})
+						.catch((err) => {
+							console.log(err);
+						});
+				}}
 				class=" w-full rounded-lg bg-main px-4 py-2 text-sm font-medium text-white hover:bg-hover focus:outline-none focus:ring-4 focus:ring-blue-300"
 				>Add</button
 			>
 		</div>
-	</form>
+	</div>
 </div>

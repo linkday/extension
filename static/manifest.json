@@ -1,0 +1,12 @@
+{
+	"name": "Linkday Extension",
+	"description": "Linkday extension for browsers",
+	"version": "1.0.0",
+	"manifest_version": 3,
+	"permissions": ["activeTab"],
+	"action": {
+		"default_title": "Linkday Extension",
+		"default_icon": "favicon.png",
+		"default_popup": "index.html"
+	}
+}
