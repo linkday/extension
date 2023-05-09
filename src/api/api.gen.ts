@@ -6,11 +6,11 @@ const User = z.object({
 	username: z.string(),
 	email: z.string().email(),
 	avatar_url: z.string().url(),
-	friend_ids: z.array(z.string()),
-	last_logged_in_at: z.coerce.date(),
-	created_at: z.coerce.date(),
-	updated_at: z.coerce.date(),
+	last_logged_in_at: z.string().datetime(),
+	created_at: z.string().datetime(),
+	updated_at: z.string().datetime(),
 });
+const UserResponse = z.object({ data: User });
 const AuthPayload = z.object({ username: z.string(), password: z.string() });
 const UserPayload = z.object({
 	username: z.string(),
@@ -18,33 +18,32 @@ const UserPayload = z.object({
 	avatar_url: z.string().url(),
 	password: z.string(),
 });
-const UserResponse = z.object({ data: User });
 const Tag = z.object({
 	id: z.string().uuid(),
 	name: z.string(),
-	created_at: z.coerce.date(),
-	updated_at: z.coerce.date(),
-	deleted_at: z.coerce.date().nullish(),
+	created_at: z.string().datetime(),
+	updated_at: z.string().datetime(),
+	deleted_at: z.string().datetime().nullish(),
 });
 const Bookmark = z.object({
 	id: z.string().uuid(),
 	url: z.string().url(),
 	title: z.string(),
 	description: z.string(),
-	thumbnail_url: z.string().url(),
+	thumbnail_url: z.string().url().optional(),
 	user_id: z.string().uuid(),
 	tags: z.array(Tag),
-	created_at: z.coerce.date(),
-	deleted_at: z.coerce.date().nullish(),
+	created_at: z.string().datetime(),
+	deleted_at: z.string().datetime().nullish(),
 });
 const BookmarksResponse = z.object({ data: z.array(Bookmark) });
 const Group = z.object({
 	id: z.string().uuid(),
 	name: z.string(),
 	users: z.array(User),
-	created_at: z.coerce.date(),
-	updated_at: z.coerce.date(),
-	deleted_at: z.coerce.date().nullish(),
+	created_at: z.string().datetime(),
+	updated_at: z.string().datetime(),
+	deleted_at: z.string().datetime().nullish(),
 });
 const GroupsResponse = z.object({ data: z.array(Group) });
 const GroupPayload = z.object({ name: z.string() });
@@ -57,25 +56,11 @@ const BookmarkPayload = z.object({
 	tag_ids: z.array(z.string()),
 });
 const BookmarkResponse = z.object({ data: Bookmark });
-const SocialUser = z.object({
-	id: z.string().uuid(),
-	name: z.string(),
-	email: z.string().email(),
-	bookmark_1_id: z.string().uuid(),
-	bookmark_2_id: z.string().uuid(),
-	bookmark_3_id: z.string().uuid(),
-	similarity: z.number(),
-	created_at: z.coerce.date().optional(),
-	updated_at: z.coerce.date().optional(),
-});
-const SocialUsersResponse = z.object({ data: SocialUser });
-const MatchPayload = z.object({ user_id: z.string().uuid() });
-const MatchResponse = z.object({ data: MatchPayload });
 
 export type User = z.infer<typeof User>;
+export type UserResponse = z.infer<typeof UserResponse>;
 export type AuthPayload = z.infer<typeof AuthPayload>;
 export type UserPayload = z.infer<typeof UserPayload>;
-export type UserResponse = z.infer<typeof UserResponse>;
 export type Tag = z.infer<typeof Tag>;
 export type Bookmark = z.infer<typeof Bookmark>;
 export type BookmarksResponse = z.infer<typeof BookmarksResponse>;
@@ -88,16 +73,12 @@ export type TagPayload = z.infer<typeof TagPayload>;
 export type TagResponse = z.infer<typeof TagResponse>;
 export type BookmarkPayload = z.infer<typeof BookmarkPayload>;
 export type BookmarkResponse = z.infer<typeof BookmarkResponse>;
-export type SocialUser = z.infer<typeof SocialUser>;
-export type SocialUsersResponse = z.infer<typeof SocialUsersResponse>;
-export type MatchPayload = z.infer<typeof MatchPayload>;
-export type MatchResponse = z.infer<typeof MatchResponse>;
 
 export const schemas = {
 	User,
+	UserResponse,
 	AuthPayload,
 	UserPayload,
-	UserResponse,
 	Tag,
 	Bookmark,
 	BookmarksResponse,
@@ -110,19 +91,15 @@ export const schemas = {
 	TagResponse,
 	BookmarkPayload,
 	BookmarkResponse,
-	SocialUser,
-	SocialUsersResponse,
-	MatchPayload,
-	MatchResponse,
 };
 
-const endpoints = makeApi([
+export const endpoints = makeApi([
 	{
 		method: "get",
 		path: "/api/v1/auth/current-user",
 		alias: "getCurrentUser",
 		requestFormat: "json",
-		response: User,
+		response: UserResponse,
 		errors: [
 			{
 				status: 401,
@@ -158,6 +135,20 @@ const endpoints = makeApi([
 		alias: "logout",
 		requestFormat: "json",
 		response: z.void(),
+		errors: [
+			{
+				status: 401,
+				description: "The operation is unauthenticated",
+				schema: z.void(),
+			},
+		],
+	},
+	{
+		method: "get",
+		path: "/api/v1/bookmarks",
+		alias: "getBookmarks",
+		requestFormat: "json",
+		response: BookmarksResponse,
 		errors: [
 			{
 				status: 401,
@@ -380,46 +371,6 @@ const endpoints = makeApi([
 			{
 				status: 404,
 				description: "The group is not found",
-				schema: z.void(),
-			},
-		],
-	},
-	{
-		method: "post",
-		path: "/api/v1/social/match",
-		alias: "matchUser",
-		requestFormat: "json",
-		parameters: [
-			{
-				name: "body",
-				type: "Body",
-				schema: z.object({ user_id: z.string().uuid() }),
-			},
-		],
-		response: MatchResponse,
-		errors: [
-			{
-				status: 401,
-				description: "The operation is unauthenticated",
-				schema: z.void(),
-			},
-			{
-				status: 404,
-				description: "The user is not found",
-				schema: z.void(),
-			},
-		],
-	},
-	{
-		method: "get",
-		path: "/api/v1/social/similar-users",
-		alias: "getSimilarUsers",
-		requestFormat: "json",
-		response: SocialUsersResponse,
-		errors: [
-			{
-				status: 401,
-				description: "The operation is unauthenticated",
 				schema: z.void(),
 			},
 		],
