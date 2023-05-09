@@ -162,7 +162,7 @@
 
 						{#if isSelectTagPanelOpen}
 							<div
-								class="absolute max-w-[calc(100vw-4rem)] md:max-w-[35%]"
+								class="relative max-w-[calc(100vw-4rem)] md:max-w-[35%]"
 								bind:this={selectTagPanel}
 								on:keydown={onTagKeyDown}
 							>
