@@ -4,9 +4,19 @@
 	"version": "1.0.0",
 	"manifest_version": 3,
 	"permissions": ["activeTab"],
+	"content_scripts": [
+		{
+			"matches": ["https://stage.linkday.ez4o.com/*", "https://linkday.ez4o.com/*"],
+			"js": ["content-script.js"]
+		}
+	],
+	"background": {
+		"service_worker": "service-worker.js",
+		"type": "module"
+	},
 	"action": {
 		"default_title": "Linkday Extension",
-		"default_icon": "favicon.png",
+		"default_icon": "logo.png",
 		"default_popup": "index.html"
 	}
 }
