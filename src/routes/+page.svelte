@@ -12,6 +12,7 @@
 	import { circIn } from "svelte/easing";
 
 	export let data;
+	let success: boolean | undefined = undefined;
 
 	function getExtensionMode(): ExtensionMode {
 		return data.mode;
@@ -290,15 +291,16 @@
 								})
 								.then((resp) => {
 									console.log(resp);
-									// goto("/bookmarks");
-									mode = ExtensionMode.ShowFeed;
-									strokeOffset.set(25);
+									success = true;
 								})
 								.catch((err) => {
 									console.log(err);
+									success = false;
 								})
 								.finally(() => {
 									isSubmitting = false;
+									mode = ExtensionMode.ShowResult;
+									strokeOffset.set(25);
 								});
 						}}
 						class=" flex w-full items-center justify-center rounded-lg bg-main px-4 py-2 text-sm font-medium text-white hover:bg-hover focus:outline-none focus:ring-4 focus:ring-blue-300 disabled:opacity-50"
@@ -336,24 +338,46 @@
 				Login to add bookmarks
 			</button>
 		</div>
-	{:else if mode === ExtensionMode.ShowFeed}
+	{:else if mode === ExtensionMode.ShowResult}
 		<div class="my-2 flex h-24 w-full flex-col items-center justify-center">
 			<div class="flex flex-col items-center justify-center">
-				<svg
-					class="h-12 w-12 text-green-500"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke="currentColor"
-					style="stroke-dashoffset: {$strokeOffset}; stroke-dasharray: 50"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M5 13l4 4L19 7"
-					/>
-				</svg>
-				<div class="text-center text-gray-600 dark:text-gray-400">Bookmark added successfully.</div>
+				{#if success}
+					<svg
+						class="h-12 w-12 text-green-500"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+						style="stroke-dashoffset: {$strokeOffset}; stroke-dasharray: 50"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M5 13l4 4L19 7"
+						/>
+					</svg>
+					<div class="text-center text-gray-600 dark:text-gray-400">
+						Bookmark added successfully.
+					</div>
+				{:else}
+					<svg
+						class="h-12 w-12 text-red-500"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+						style="stroke-dashoffset: {$strokeOffset}; stroke-dasharray: 50"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M6 18L18 6M6 6l12 12"
+						/>
+					</svg>
+					<div class="text-center text-gray-600 dark:text-gray-400">
+						Bookmark could not be added.
+					</div>
+				{/if}
 			</div>
 		</div>
 	{:else if mode === ExtensionMode.ShowInitializing}

@@ -1,6 +1,6 @@
 export enum ExtensionMode {
 	ShowInitializing,
 	ShowForm,
-	ShowFeed,
+	ShowResult,
 	ShowLoginLink,
 }
