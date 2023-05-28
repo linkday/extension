@@ -7,6 +7,7 @@
 	"content_scripts": [
 		{
 			"matches": ["https://stage.linkday.ez4o.com/*", "https://linkday.ez4o.com/*"],
+			// "matches": ["https://stage.linkday.ez4o.com/*", "https://linkday.ez4o.com/*", "http://127.0.0.1:5173/*", "http://127.0.0.1:4173/*"],
 			"js": ["content-script.js"]
 		}
 	],

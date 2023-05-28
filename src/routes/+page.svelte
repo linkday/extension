@@ -145,7 +145,7 @@
 			<div class="mb-12 text-4xl font-bold">Add Bookmark</div>
 			<div class="grid grid-flow-row gap-4">
 				<div class="flex flex-col gap-2">
-					<label class="text-md mb-2 block font-medium text-gray-900">
+					<label class="mb-2 block text-sm font-medium text-gray-900">
 						Url
 						<input
 							type="text"
@@ -163,7 +163,7 @@
 						<ErrorMessage message={$errors.url} />
 					</label>
 
-					<label class="text-md mb-2 block font-medium text-gray-900">
+					<label class="mb-2 block text-sm font-medium text-gray-900">
 						Tags
 						<input
 							type="text"
@@ -249,6 +249,29 @@
 
 						<ErrorMessage message={$errors.tag_ids} />
 					</label>
+
+					<div class="mb-2 text-sm font-medium text-gray-900">
+						<div class="flex items-center">
+							Incognito Mode
+							<label class="relative ml-2 inline-flex cursor-pointer items-center">
+								<input
+									type="checkbox"
+									class="peer sr-only"
+									bind:checked={$form.incognito}
+									{...$constraints.incognito}
+									on:change={() => {
+										superValidate($form, BookmarkPayload).then((result) => {
+											$errors.incognito = result.errors.incognito;
+										});
+									}}
+								/>
+								<div
+									class="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-main peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none"
+								/>
+							</label>
+						</div>
+						<ErrorMessage message={$errors.incognito} />
+					</div>
 				</div>
 				<div class="flex justify-end">
 					<button
