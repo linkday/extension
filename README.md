@@ -13,7 +13,7 @@
 
 <!-- PROJECT BANNER -->
 
-![extension](https://socialify.git.ci/linkday/extension/image?description=1&descriptionEditable=The%20official%20extension%20for%20linkday%20app.&font=KoHo&logo=https%3A%2F%2Flinkday.ez4o.com%2Flogo.svg&name=1&owner=1&pattern=Circuit%20Board&theme=Light)
+![extension](https://socialify.git.ci/linkday/extension/image?description=1&descriptionEditable=The%20official%20extension%20for%20linkday%20app.&font=KoHo&logo=https://raw.githubusercontent.com/linkday/extension/main/static/logo.png&name=1&owner=1&pattern=Circuit%20Board&theme=Light)
 
 <br />
 <div align="center">
