@@ -36,6 +36,8 @@ jobs:
 
       - run: |
           pnpm build
+          sudo apt install zip
+          zip -r linkday-extension.zip build
 
       - name: Release Browser Extension
         uses: "marvinpinto/action-automatic-releases@latest"
@@ -43,4 +45,4 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
           files: |
-            build
+            linkday-extension.zip
