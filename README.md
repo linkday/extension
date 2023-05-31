@@ -1,38 +1,105 @@
-# create-svelte
+<div id="top"></div>
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+<!-- PROJECT SHIELDS -->
 
-## Creating a project
+[<div align="center"> ![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![MIT License][license-shield]][license-url]
+[![Issues][issues-shield]][issues-url]
+[![Issues Closed][issues-closed-shield]</div>][issues-closed-url]
 
-If you're seeing this, you've probably already done this step. Congrats!
+<br />
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+<!-- PROJECT BANNER -->
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+![extension](https://socialify.git.ci/linkday/extension/image?description=1&descriptionEditable=The%20official%20extension%20for%20linkday%20app.&font=KoHo&logo=https%3A%2F%2Flinkday.ez4o.com%2Flogo.svg&name=1&owner=1&pattern=Circuit%20Board&theme=Light)
 
-## Developing
+<br />
+<div align="center">
+<p align="center">
+    <a href="https://github.com/linkday/extension#usage"><strong>Explore Usage »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/linkday/extension/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/linkday/extension/issues">Request Feature</a>
+  </p>
+</div>
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+<!-- TABLE OF CONTENTS -->
 
-```bash
-npm run dev
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+    </li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+<!-- ABOUT THE PROJECT -->
 
-## Building
+## About The Project
 
-To create a production version of your app:
+This is the official extension for linkday app. Please go to extension page to download the latest version.
 
-```bash
-npm run build
-```
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-You can preview the production build with `npm run preview`.
+## Contributing
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+Contributions are what make the open source community such an amazing place to
+learn, inspire, and create. Any contributions you make are **greatly
+appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and
+create a pull request. You can also simply open an issue with the tag
+"enhancement". Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feat/amazing-feature`)
+3. Commit your Changes with
+   [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
+4. Push to the Branch (`git push origin feat/amazing-feature`)
+5. Open a Pull Request
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## License
+
+Distributed under the MIT License. See
+[LICENSE](https://github.com/linkday/extension/blob/main/LICENSE)
+for more information.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## Contact
+
+### Author
+
+- HSING-HAN, WU (Xyphuz)
+  - Mail me: xyphuzwu@gmail.com
+  - About me: <https://www.xyphuz.com>
+  - GitHub: <https://github.com/wst24365888>
+
+### Project Link
+
+- <https://github.com/linkday/extension>
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+[contributors-shield]: https://img.shields.io/github/contributors/linkday/extension.svg?style=for-the-badge
+[contributors-url]: https://github.com/linkday/extension/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/linkday/extension.svg?style=for-the-badge
+[forks-url]: https://github.com/linkday/extension/network/members
+[stars-shield]: https://img.shields.io/github/stars/linkday/extension.svg?style=for-the-badge
+[stars-url]: https://github.com/linkday/extension/stargazers
+[issues-shield]: https://img.shields.io/github/issues/linkday/extension.svg?style=for-the-badge
+[issues-url]: https://github.com/linkday/extension/issues
+[issues-closed-shield]: https://img.shields.io/github/issues-closed/linkday/extension.svg?style=for-the-badge
+[issues-closed-url]: https://github.com/linkday/extension/issues?q=is%3Aissue+is%3Aclosed
+[license-shield]: https://img.shields.io/github/license/linkday/extension.svg?style=for-the-badge
+[license-url]: https://github.com/linkday/extension/blob/main/LICENSE

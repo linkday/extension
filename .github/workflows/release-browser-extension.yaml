@@ -1,0 +1,46 @@
+name: Release Browser Extension
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  id-token: "write"
+  contents: "write"
+  packages: "write"
+  pull-requests: "read"
+
+jobs:
+  tagged-release:
+    runs-on: "ubuntu-latest"
+    env:
+      PUBLIC_LOGIN_URL: ${{ secrets.PUBLIC_LOGIN_URL }}
+      PUBLIC_API_PREFIX: ${{ secrets.PUBLIC_API_PREFIX }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Switch to Current Branch
+        run: git checkout ${{ env.BRANCH }}
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8.0.0
+          run_install: |
+            - recursive: true
+
+      - run: |
+          pnpm build
+
+      - name: Release Browser Extension
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          files: |
+            build/**
