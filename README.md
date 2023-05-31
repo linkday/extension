@@ -45,7 +45,9 @@
 
 ## About The Project
 
-This is the official extension for linkday app. Please go to extension page to download the latest version.
+This is the official extension for linkday app.
+
+Please go to [release page](https://github.com/linkday/extension/releases) to download the latest version.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
